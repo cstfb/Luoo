@@ -1,0 +1,143 @@
+﻿<phone:PhoneApplicationPage
+    x:Class="Luoo.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Portrait" Orientation="Portrait"
+    shell:SystemTray.IsVisible="False">
+
+    <phone:PhoneApplicationPage.Resources>
+        <Storyboard x:Name="textStoryBoard">
+            <DoubleAnimation Storyboard.TargetName="promptText"
+                             Storyboard.TargetProperty="Opacity"
+                             From="1.0" To="0.0" Duration="0:0:2"
+                             AutoReverse="False"/>
+        </Storyboard>
+        <Storyboard x:Name="musicCoverStoryBoard">
+            <DoubleAnimation Storyboard.TargetName="musicCover"
+                             Storyboard.TargetProperty="Opacity"
+                             From="0.0" To="0.8" Duration="0:0:1"
+                             AutoReverse="False"/>
+        </Storyboard>
+        <Storyboard x:Name="albumCoverStoryBoard">
+            <DoubleAnimation Storyboard.TargetName="albumCover"
+                             Storyboard.TargetProperty="Opacity"
+                             From="0.0" To="0.8" Duration="0:0:1"
+                             AutoReverse="False"/>
+        </Storyboard>
+        <Storyboard x:Name="playAndPauseStoryBoard">
+            <DoubleAnimation Storyboard.TargetName="playAndPause"
+                             Storyboard.TargetProperty="Opacity"
+                             From="0.0" To="1" Duration="0:0:.5"
+                             AutoReverse="False"/>
+        </Storyboard>
+        <Storyboard x:Name="nextSongStoryBoard">
+            <DoubleAnimation Storyboard.TargetName="nextSong"
+                             Storyboard.TargetProperty="Opacity"
+                             From="0.0" To="1" Duration="0:0:.5"
+                             AutoReverse="False"/>
+        </Storyboard>
+        <Storyboard x:Name="lastSongStoryBoard">
+            <DoubleAnimation Storyboard.TargetName="lastSong"
+                             Storyboard.TargetProperty="Opacity"
+                             From="0.0" To="1" Duration="0:0:.5"
+                             AutoReverse="False"/>
+        </Storyboard>
+        <Storyboard x:Name="nextAlbumStoryBoard">
+            <DoubleAnimation Storyboard.TargetName="nextAlbum"
+                             Storyboard.TargetProperty="Opacity"
+                             From="0.0" To="1" Duration="0:0:.5"
+                             AutoReverse="False"/>
+        </Storyboard>
+        <Storyboard x:Name="lastAlbumStoryBoard">
+            <DoubleAnimation Storyboard.TargetName="lastAlbum"
+                             Storyboard.TargetProperty="Opacity"
+                             From="0.0" To="1" Duration="0:0:.5"
+                             AutoReverse="False"/>
+        </Storyboard>
+    </phone:PhoneApplicationPage.Resources>
+
+    <!--LayoutRoot 是包含所有页面内容的根网格-->
+    <Grid x:Name="LayoutRoot" Background="Transparent">
+        <!--背景-->
+        <Image Name="backgroundImage" Source="assets/Tiles/background4.png" Height="Auto" Width="Auto" Stretch="None"
+               VerticalAlignment="Center" HorizontalAlignment="Center" Opacity="0.5"/>
+        <!--LUOO.net-->
+        <TextBlock Text="落网Luoo.net" FontFamily="Constantia" FontSize="40" Margin="0,10,0,0"/>
+        <!--StackPanel-->
+        <StackPanel Margin="0,90,0,0">
+            <!--进度条-->
+            <Grid Height="10">
+                <ProgressBar Name="progressBar" Height="10" IsIndeterminate="True" Visibility="Collapsed" Foreground="Orange"/>
+            </Grid>
+            <!--歌曲信息-->
+            <Grid Width="auto" Height="100" VerticalAlignment="Top">
+                <TextBlock Name="title" VerticalAlignment="Top" HorizontalAlignment="Right" Text="" Height="50" Width="350"
+                            FontSize="40" FontFamily="Verdana" />
+                <TextBlock VerticalAlignment="Bottom" HorizontalAlignment="Right" Text="Artist" Height="25" Width="350"
+                            FontSize="20" FontFamily="Arial" TextWrapping="Wrap" Margin="0,0,0,25"/>
+                <TextBlock Name="artist" VerticalAlignment="Bottom" HorizontalAlignment="Right" Text="" Height="25" Width="280"
+                            FontSize="20" FontFamily="Arial" TextWrapping="Wrap" Margin="0,0,0,25"/>
+                <TextBlock VerticalAlignment="Bottom" HorizontalAlignment="Right" Text="Album" Height="25" Width="350"
+                            FontSize="20" FontFamily="Arial" TextWrapping="Wrap"/>
+                <TextBlock Name="album" VerticalAlignment="Bottom" HorizontalAlignment="Right" Text="" Height="25" Width="280"
+                            FontSize="20" FontFamily="Arial" TextWrapping="Wrap"/>
+                <Rectangle Height="80" Width="80" StrokeThickness="0" Stroke="LightSlateGray" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="20,0,0,0">
+                    <Rectangle.Fill>
+                        <ImageBrush x:Name="musicCover" ImageSource="/assets/Cover/cover1.jpg" Opacity="0.8"/>
+                    </Rectangle.Fill>
+                </Rectangle>
+            </Grid>
+            <!--专辑图片-->
+            <Rectangle Height="380" Width="Auto" Margin="3,0,3,0" Stroke="LightSlateGray" StrokeThickness="0">
+                <Rectangle.Fill>
+                    <ImageBrush x:Name="albumCover" Stretch="None" ImageSource="/assets/Cover/cover2.jpg" Opacity="0.8"/>
+                </Rectangle.Fill>
+            </Rectangle>
+            <!--专辑topic-->
+            <Grid Background="Silver"  Margin="3,0,3,0" Opacity=".8">
+                <TextBlock Name="topic" Height="30" Width="auto" FontSize="25" FontFamily="Arial"/>
+            </Grid>
+            <!--播放控制-->
+            <Grid Height="100" Width="Auto" Background="White" Opacity=".6" Margin="0,30,0,0" >
+                <Image Name="lastAlbum" Source="/assets/icons/lastAlbum.png" HorizontalAlignment="Left"/>
+                <Button Name="lastAlbumButton" Background="Transparent" BorderBrush="Transparent" Width="100" HorizontalAlignment="Left"
+                        Click="lastAlbumButton_Click" Opacity="0"/>
+                <Ellipse Height="90" Width="90" Stroke="Black" StrokeThickness="3" HorizontalAlignment="Left" Margin="5,0,0,0"/>
+
+                <Image Name="nextAlbum" Source="/assets/icons/nextAlbum.png" HorizontalAlignment="Right"/>
+                <Button Name="nextAlbumButton"  Background="Transparent" BorderBrush="Transparent" Width="100" HorizontalAlignment="Right" 
+                        Click="nextAlbumButton_Click" Opacity="0"/>
+                <Ellipse Height="90" Width="90" Stroke="Black" StrokeThickness="3" HorizontalAlignment="Right" Margin="0,0,5,0"/>
+
+                <Image Name="nextSong" Source="/assets/icons/nextSong.png" HorizontalAlignment="Right" Margin="0,0,100,0"/>
+                <Button Name="nextSongButton" Background="Transparent"  BorderBrush="Transparent" Width="100" HorizontalAlignment="Right" Margin="0,0,100,0"
+                        Click="nextSongButton_Click" Opacity="0"/>
+                <Ellipse Height="80" Width="80" Stroke="Black" StrokeThickness="3" HorizontalAlignment="Right" Margin="0,0,110,0"/>
+
+                <Image Name="lastSong" Source="/assets/icons/lastSong.png" HorizontalAlignment="Left" Margin="100,0,0,0"/>
+                <Button Name="lastSongButton" Background="Transparent" BorderBrush="Transparent" Width="100" HorizontalAlignment="Left" Margin="100,0,0,0"
+                        Click="lastSongButton_Click" Opacity="0"/>
+                <Ellipse Height="80" Width="80" Stroke="Black" StrokeThickness="3" HorizontalAlignment="Left" Margin="110,0,0,0"/>
+
+                <Image Name="playAndPause" Source="/assets/icons/pause.png" HorizontalAlignment="Center"/>
+                <Button Name="playAndPauseButton" Background="Transparent"  Width="100" HorizontalAlignment="Center" BorderBrush="Transparent"
+                        Click="playAndPauseButton_Click" Opacity="0"/>
+                <Ellipse Height="75" Width="75" Stroke="Black" StrokeThickness="3"/>
+
+            </Grid>
+            <TextBlock VerticalAlignment="Bottom" Text="   上一期      上一曲    播放/暂停   下一曲     下一期"
+                           FontFamily="Verdana" FontSize="20"/>
+        </StackPanel>
+        <TextBlock Name="promptText" VerticalAlignment="Center" HorizontalAlignment="Center" Height="30" Width="300"
+                   Text="再按一次退出应用" TextAlignment="Center" Foreground="White" Opacity="0"/>
+    </Grid>
+
+</phone:PhoneApplicationPage>

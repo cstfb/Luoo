@@ -1,0 +1,4 @@
+C:\Users\tian__000\documents\visual studio 2013\Projects\Luoo\LuooAudioPlayerAgent\Bin\Debug\LuooAudioPlayerAgent.dll
+C:\Users\tian__000\documents\visual studio 2013\Projects\Luoo\LuooAudioPlayerAgent\Bin\Debug\LuooAudioPlayerAgent.pdb
+C:\Users\tian__000\documents\visual studio 2013\Projects\Luoo\LuooAudioPlayerAgent\obj\Debug\LuooAudioPlayerAgent.dll
+C:\Users\tian__000\documents\visual studio 2013\Projects\Luoo\LuooAudioPlayerAgent\obj\Debug\LuooAudioPlayerAgent.pdb
